@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'users/12' => 'users/view',
-    'users/15' => 'users/view',
+    'users/([0-9]+)' => 'users/view/$1', //actionView UsersController
+    
     
     'users' => 'users/index', //actionIndex in UsersController
 );
