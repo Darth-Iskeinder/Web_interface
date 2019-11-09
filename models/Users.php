@@ -20,14 +20,22 @@ class Users {
         
     }
     
+    const SHOW_BY_DEFAULT = 2;
+
+
     //Returns all users
-    public static function getUsersList() 
+    
+    public static function getUsersList($count = self::SHOW_BY_DEFAULT, $page = 1) 
     {
+        $count = intval($count);
+        $page = intval($page);
+        $offset = ($page - 1) * $count;
+        
         $db = Db::getConnection();
         
         $usersList = array();
         
-        $result = $db->query('SELECT id, login, f_name, l_name FROM users');
+        $result = $db->query("SELECT id, login, f_name, l_name FROM users ORDER BY id DESC LIMIT $count OFFSET $offset");
         
         $i=0;
         while ($row = $result->fetch()) {
@@ -38,5 +46,14 @@ class Users {
             $i++;
         }
         return $usersList;
+    }
+    public static function getTotalUsers() 
+    {
+        $db = Db::getConnection();
+        $result = $db->query('SELECT count(id) AS count FROM users');
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $result->fetch();
+        
+        return $row['count'];
     }
 }

@@ -34,14 +34,22 @@
 		<div id="page-bgtop">
 			<div id="page-bgbtm">
 				<div id="content">
-					<?php foreach ($userList as $users):?>
+					
 					<div class="post">
-						<h2 class="title"><a href='/users/<?php echo $users['id'] ;?>'><?php echo $users['f_name'].' # '.$users['id'];?></a></h2>
+						
+                                                <h2 class="title">ID: <?php echo $users['id'];?></h2>
+                                                <h2 class="title">Login: <?php echo $users['login'];?></h2>
+                                                <h2 class="title">Password: <?php echo $users['password'];?></h2>
+                                                <h2 class="title">First name: <?php echo $users['f_name'];?></h2>
+                                                <h2 class="title">Last name: <?php echo $users['l_name'];?></h2>
+                                                <h2 class="title">Gender: <?php echo $users['gender'];?></h2>
+                                                <h2 class="title">Date of birth: <?php echo $users['date_of_birth'];?></h2>
+                                                <br><hr>
+                                                <p><a href='/users/' class="permalink"> Back to Admin Panel</a></p>
+                                                
 						
 					</div>
-                                        <?php endforeach;?>
-                                    
-                                        <?php echo $pagination->get(); ?>
+                                       
 					<div style="clear: both;">&nbsp;</div>
 				</div>
 				
@@ -50,7 +58,6 @@
 		</div>
 	</div>
 	<!-- end #page -->
-        
 </div>
 <div id="footer">
 	<p>Copyright (c) 2019</p>
