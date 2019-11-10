@@ -1,7 +1,6 @@
 <?php
 
-include_once ROOT.'/models/Users.php';
-include_once ROOT.'/components/Pagination.php';
+
 
 class UsersController {
     
@@ -12,7 +11,7 @@ class UsersController {
         $userList = Users::getUsersList($page);
         
         $total = Users::getTotalUsers();
-        echo $total;
+        
         //Создаем объект Pagination - постраничная навигация
         $pagination = new Pagination($total, $page, Users::SHOW_BY_DEFAULT, 'page-');
         

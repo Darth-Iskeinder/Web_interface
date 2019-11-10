@@ -45,7 +45,7 @@
                                                 <h2 class="title">Gender: <?php echo $users['gender'];?></h2>
                                                 <h2 class="title">Date of birth: <?php echo $users['date_of_birth'];?></h2>
                                                 <br><hr>
-                                                <p><a href='/users/' class="permalink"> Back to Admin Panel</a></p>
+                                                <p><a href='/users/page-1' class="permalink"> Back to Admin Panel</a></p>
                                                 
 						
 					</div>

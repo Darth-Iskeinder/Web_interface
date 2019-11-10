@@ -1,32 +1,15 @@
-<!DOCTYPE html">
-<html>
-<head>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Admin Panel</title>
-<link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
-<link href="/template/css/style.css" rel="stylesheet" type="text/css" media="screen" />
-</head>
-<body>
-	<div id="menu-wrapper">
-		<div id="menu">
-			<ul>
-				<li class="current_page_item"><a href="#">Homepage</a></li>
-				
-				<li><a href="#">Admin panel</a></li>
-			</ul>
-		</div>
-		<!-- end #menu -->
-	</div>
+<?php include(ROOT.('/views/layouts/header.php')) ?>
 
 <div id="wrapper">
 	<div id="header-wrapper">
 		<div id="header">
 			<div id="logo">
-				<h1><a href="#">List of Users</a></h1>
+				<h1>List of Users</h1>
 				
 			</div>
+                    <div>
+                        <button> <a href="/admin/create">Add new user</a></button>
+                    </div>
 		</div>
 	</div>
 	<!-- end #header -->
