@@ -24,8 +24,9 @@
 					</div>
                                         <?php endforeach;?>
                                     
-                                        <?php echo $pagination->get(); ?>
+                                        
 					<div style="clear: both;">&nbsp;</div>
+                                        <?php echo $pagination->get(); ?>
 				</div>
 				
 				<div style="clear: both;">&nbsp;</div>
