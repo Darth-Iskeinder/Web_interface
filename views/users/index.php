@@ -19,8 +19,12 @@
 				<div id="content">
 					<?php foreach ($userList as $users):?>
 					<div class="post">
-						<h2 class="title"><a href='/users/<?php echo $users['id'] ;?>'><?php echo $users['f_name'].' # '.$users['id'];?></a></h2>
-						
+                                            <tr>
+                                                <td><a href='/users/<?php echo $users['id'] ;?>'><?php echo $users['f_name'].' # '.$users['id'];?></a></td>
+                                            <br>
+                                            <br>
+                                                <td><a href="/admin/edit/?id=<?php echo $users['id'];?>">Edit</a></td>
+                                            </tr>
 					</div>
                                         <?php endforeach;?>
                                     

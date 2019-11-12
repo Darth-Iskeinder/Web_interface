@@ -8,5 +8,6 @@ return array(
     
     'admin/login' => 'admin/login', //actionLogin AdminController
     'admin/create' => 'admin/create', //actionCreate AdminController 
+    'admin/edit' => 'admin/edit', //actionCreate AdminController 
 );
 

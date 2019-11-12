@@ -115,4 +115,51 @@ class Admin
         $_SESSION['admin'] = $adminId;
         
     }
+    
+    public static function findUser($id)
+            
+    {
+        $db = Db::getConnection();
+        $sql = "SELECT * FROM users WHERE id=:id";
+        
+        try {
+            
+            $result = $db->prepare($sql);
+            $result->bindValue(":id", $id);
+            $result->execute();
+            
+            $user = $result->fetch(PDO::FETCH_ASSOC);
+            
+        return $user;
+             
+        } catch(PDOException $e){
+            echo $sql."<br>".$e->getMessage();
+               
+        }
+        
+        
+    }
+    
+    public static function updateUser($id, $login, $password, $f_name, $l_name, $gender, $date_of_birth) 
+    {
+        $db = Db::getConnection();
+        $sql = "UPDATE users id=:id, login=:login, password=:password, f_name=:f_name, l_name=:l_name, gender=:gender, date_of_birth=:date_of_birth WHERE id=:id";
+        
+        try {
+            $result = $db->prepare($sql);
+            $result->bindParam(":id", $id, PDO::PARAM_STR);
+            $result->bindParam(":login", $login, PDO::PARAM_STR);
+            $result->bindParam(":password", $password, PDO::PARAM_STR);
+            $result->bindParam(":f_name", $f_name, PDO::PARAM_STR);
+            $result->bindParam(":l_name", $l_name, PDO::PARAM_STR);
+            $result->bindParam(":gender", $gender, PDO::PARAM_STR);
+            $result->bindParam(":date_of_birth", $date_of_birth, PDO::PARAM_STR);
+        
+        return $result->execute();
+        } 
+        catch (PDOException $e) {
+            echo "PDO error: ".$e->getMessage();
+        
+        }
+    }
 }
