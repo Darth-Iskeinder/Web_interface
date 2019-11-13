@@ -1,172 +1,170 @@
 <?php
 
 /*
- * Класс для генерации постраничной навигации
+ * Class for generating pagination
  */
 class Pagination {
     /*
-     * $var Ссылок навигации на страницу
+     * $var Page navigation links
      */
     private $max = 10;
     
     /*
-     * $var Ключ для GET, в который пишется номер страницы
+     * $ var The key for the GET into which the page number is written
      */
     private $index = 'page';
     
     /*
-     * $var Текущая страница
+     * $var Current page
      */
     private $current_page;
     
     /*
-     * $var Общее количество записей
+     * $var Total number of entries
      */
     private $total;
     
     /*
-     * $var Записей на страницу
+     * $var Entries for page
      */
     private $limit;
     
     /*
-     * Запуск необходимых записей для навигации
-     * @param integer $total - общее количество записей
-     * @param integer $limit - количество записей на страницу
+     * Starting the necessary entries for navigation
+     
      */
     
     public function __construct($total, $currentPage, $limit, $index) 
     {
-        //Устанавливаем общее количество записей
+        //Set the total numbers of records
         $this->total = $total;
         
-        //Устанавливаем количество записей на страницу
+        //Set the number of records per page
         $this->limit = $limit;
         
-        //Устанавливаем ключ в url
+        //Set the key in url
         $this->index = $index;
         
-        //Устанавливаем количество страниц
+        //Set the number of pages
         $this->amount = $this->amount();
         
-        //Устанавливаем номер текущей страницы
+        //Set the current page number
         $this->setCurrentPage($currentPage);
     }
     
     /*
-     * Для вывода ссылок
+     * To display links
      * 
-     * @return HTML-код со ссылками навигации
+     * @return HTML-code with navigation links
      */
     public function get() 
     {
-        //Для записи ссылок
+        //To record links
         $links = null;
         
-        //Получаем ограничения для цикла
+        //We get restrictions for the cycle
         $limits = $this->limits();
         
         $html = '<ul class="pagination">';
-        //Генерируем ссылки
+        //Generate links
         for ($page = $limits[0]; $page <= $limits[1]; $page++) {
-            //Если текущая это текущая страница, ссылки нет и добавляется класс active
+            //If the current is the current page, there is no link and the active class is added
             if ($page == $this->current_page) {
                 $links.='<li class="active"><a href="#">'.$page.'</a></li>';
             } else {
-                //Иначе генеруем ссылку
+                //Else generate links
                 $links.=$this->generateHtml($page);
             }
         }
         
-        //Если ссылки создались
+        //If links are created
         if (!is_null($links)) {
-            //Если текущая страница не первая 
+            //if the current page is not the first 
             if ($this->current_page > 1)
-            //Создаем ссылку "На первую"
+            //Create links "To the first"
                 $links = $this->generateHtml(1, '$lt;').$links;
             
-            //Если текущая страница не первая 
+            //if the current page is not the first 
             if ($this->current_page < $this->amount)
-            //Создаем ссылку "На последнюю"
+            //Create link "To the last"
                 $links.=$this->generateHtml($this->amount, '&gt;');
         }
         $html.=$links.'</ul>';
         
-        //Возвращаем html
+        //Return html
         return $html;
         
     }
     /*
-     * Для генерации HTML-кода ссылки
-     * @param integer $page - номер страницы
+     * For generating HTML-code links
      */
     private function generateHtml($page, $text = null) 
     {
-        //Если текст ссылки не указан
+        //if link text is not specified
         if (!$text)
-        //Указываем, что текст - цифра страницы
+        //indicate that the text is a page number
             $text = $page;
         
         $currentURI = rtrim($_SERVER['REQUEST_URI'], '/').'/';
         $currentURI = preg_replace('~/page-[0-9]+~', '', $currentURI);
-        //Формируем HTML код ссылки и возвращаем
+        //Generate HTML link code and return
         return '<li><a href="'.$currentURI . $this->index.$page.'">'.$text.'</a></li>';
         
     }
     /*
-     * Для получения, откуда стартовать
-     * @return массив с началом и концом отсчета
+     * To get where to start
+     * @return array with start and end
      */
     private function limits() 
     {
-        //Вычисляем ссылки (чтобы активная часть была посередине)
+        //calculate links (so that the active part is in the middle)
         $left = $this->current_page - round($this->max / 2);
         
-        //Вычисляем начало отсчета
+        //calculate start
         $start = $left > 0 ? $left : 1;
         
-        //Если впереди есть как минимум $this->max страниц
+        //If there is at least $ this-> max pages ahead
         if ($start + $this->max <= $this->amount){
-           //Назначаем конец цикла вперед на $this->max страниц или просто на минимум
+           //Assign the end of the loop forward to $ this-> max pages or just to a minimum
             $end = $start > 1 ? $start + $this->max : $this->max; 
         }
         else {
-            //Конец - общее количество страниц
+            //End - Total Pages
             $end = $this->amount;
             
-            //Начало - минус $this->max от конца
+            //start - minus $ this-> max from the end
             $start = $this->amount - $this->max > 0 ? $this->amount - $this->max : 1;
         }
-        //Возвращаем 
+        //return 
         return array($start, $end);
         
     }
     /*
-     * Для установки текущей страницы
+     * For set current pages
      */
     private function setCurrentPage($currentPage)
     {
-        //Получаем номер страницы
+        //Get number of pages
         $this->current_page = $currentPage;
         
-        //Если текущая страница более нуля
+        //if current pages more than zero
         if ($this->current_page > 0) {
-            //Если текунщая страница меньше общего количества страниц
+            //If the current page is less than the total number of pages
             if ($this->current_page > $this->amount)
-            //Устанавливаем страницу на последнюю
+            //Set the page to the last
                 $this->current_page = $this->amount;
         } else {
-            //Устанавливаем страницу на первую
+            //Set the page to the first
             $this->current_page = 1;
             
         }
     }
     /*
-     * Для получения общего числа страниц
+     * To get the total number of pages
      */
     private function amount()
     {
-        //Делим и возвращаем
+        //divide and return
         return round($this->total / $this->limit);
     }
 }

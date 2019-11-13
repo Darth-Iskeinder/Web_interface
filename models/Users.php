@@ -47,6 +47,8 @@ class Users {
         }
         return $usersList;
     }
+    
+    //Get total amount of users in database
     public static function getTotalUsers() 
     {
         $db = Db::getConnection();

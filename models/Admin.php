@@ -3,6 +3,9 @@
 
 class Admin 
 {
+    /*
+     * Add new users in database getting from create form
+     */
     public static function addUser($login, $password, $f_name, $l_name, $gender, $date_of_birth) 
     {
         $db = Db::getConnection();
@@ -29,12 +32,14 @@ class Admin
         
         
     }
+    //Checking login for string length
     public static function checkLogin($login) {
         if (strlen($login) >=3) {
             return true;
         }
         return false;
     }
+    //Checking password for string length
     public static function checkPassword($password) {
         if (strlen($password) >=3) {
             return true;
@@ -42,6 +47,7 @@ class Admin
         return false;
         
     }
+    //Checking Name for string length
     public static function checkFname($f_name) {
         if (strlen($f_name) >=3) {
             return true;
@@ -49,6 +55,7 @@ class Admin
         return false;
         
     }
+    //Checking Surname for string length
     public static function checkLname($l_name) {
         if (strlen($l_name) >=3) {
             return true;
@@ -56,6 +63,7 @@ class Admin
         return false;
         
     }
+    //Checking gender for string length
     public static function checkGender($gender) {
         if (strlen($gender) >=1) {
             return true;
@@ -63,6 +71,7 @@ class Admin
         return false;
         
     }
+    //Checking date of birth for string length
     public static function checkDateOfBirth($date_of_birth) {
         if (strlen($date_of_birth) >=6) {
             return true;
@@ -70,6 +79,7 @@ class Admin
         return false;
         
     }
+    //Checking login on exist
     public static function checkLoginExists($login) {
         $db = Db::getConnection();
         
@@ -116,6 +126,7 @@ class Admin
         
     }
     
+    //Search user by id
     public static function findUser($id)
             
     {
@@ -140,6 +151,7 @@ class Admin
         
     }
     
+    //Update personal information user
     public static function updateUser($id, $login, $password, $f_name, $l_name, $gender, $date_of_birth) 
     {
         $db = Db::getConnection();

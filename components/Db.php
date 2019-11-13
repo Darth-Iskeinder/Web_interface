@@ -1,7 +1,9 @@
 <?php
 
 
-class Db {
+class Db 
+{
+    //Database get Connection
     public static function getConnection() 
     {
         $paramsPath = ROOT.'/config/db_params.php';

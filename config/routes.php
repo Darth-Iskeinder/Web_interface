@@ -6,8 +6,8 @@ return array(
     
     'users/page-([0-9]+)' => 'users/index/$1', //actionIndex in UsersController
     
-    'admin/login' => 'admin/login', //actionLogin AdminController
+    '' => 'admin/login', //actionLogin AdminController
     'admin/create' => 'admin/create', //actionCreate AdminController 
-    'admin/edit' => 'admin/edit', //actionCreate AdminController 
+    'admin/edit' => 'admin/edit', //actionEdit AdminController 
 );
 

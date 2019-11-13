@@ -41,7 +41,7 @@
         
 </div>
 <div id="footer">
-	<p>Copyright (c) 2019</p>
+	<p>Users data</p>
 </div>
 <!-- end #footer -->
 </body>
